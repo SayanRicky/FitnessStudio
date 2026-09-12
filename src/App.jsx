@@ -10,14 +10,14 @@ import {
    custom colors are applied via inline style + these variables.
 ============================================================================ */
 const THEME_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
   .fl-root{
-    --ink:#14171A; --slate:#63696F; --paper:#FFFFFF; --mist:#F7F7F5;
-    --line:#E6E6E2; --pine:#28402F; --pine-tint:#EAF1EA; --pine-soft:#D3E1D4;
-    --neutral-fill:#EDEDEA; --neutral-fill-2:#E4E4E1;
+    --ink:#111111; --slate:#6B6F73; --on-dark:#B7BCC2; --paper:#FFFFFF; --mist:#F6F6F4;
+    --line:#E6E6E3; --pine:#111111; --pine-dark:#2B2B2B; --pine-tint:#F1F1EF; --pine-soft:#C7C7C3;
+    --neutral-fill:#ECECEA; --neutral-fill-2:#E1E1DE;
     font-family:'Inter',sans-serif; color:var(--ink); background:#FFFFFF;
   }
-  .fl-display{ font-family:'Manrope',sans-serif; }
+  .fl-display{ font-family:'Plus Jakarta Sans',sans-serif; }
   .fl-scroll::-webkit-scrollbar{ display:none; }
   .fl-scroll{ -ms-overflow-style:none; scrollbar-width:none; }
   @keyframes fl-pulse{ 0%,100%{ opacity:1 } 50%{ opacity:.45 } }
@@ -25,7 +25,89 @@ const THEME_CSS = `
   .fl-fade{ animation: fl-fade .18s ease-out; }
   @keyframes fl-fade{ from{ opacity:0; transform:translateY(4px);} to{ opacity:1; transform:translateY(0);} }
   input[type=checkbox].fl-check{ accent-color: var(--pine); }
+
+  .fl-navlink{ cursor:pointer; transition: color .15s ease, opacity .15s ease; }
+  .fl-navlink:hover{ color:var(--ink) !important; opacity:1 !important; }
+  .fl-link{ cursor:pointer; transition: color .15s ease; }
+  .fl-link:hover{ color:var(--ink) !important; }
+  .fl-link-invert{ cursor:pointer; transition: opacity .15s ease; }
+  .fl-link-invert:hover{ opacity:0.6 !important; }
+  .fl-icon-btn{ cursor:pointer; transition: background-color .15s ease, transform .1s ease; }
+  .fl-icon-btn:hover{ background-color: rgba(255,255,255,0.12); }
+  .fl-icon-btn:active{ transform: scale(0.92); }
+  .fl-icon-btn-light{ cursor:pointer; transition: background-color .15s ease, transform .1s ease; }
+  .fl-icon-btn-light:hover{ background-color: rgba(10,10,10,0.06); }
+  .fl-icon-btn-light:active{ transform: scale(0.92); }
+  .fl-btn-primary:hover{ background-color:var(--pine-dark) !important; transform:translateY(-2px); box-shadow:0 10px 22px -8px rgba(0,0,0,0.35); }
+  .fl-btn-primary:active{ transform:translateY(0) scale(0.97); box-shadow:0 4px 10px -4px rgba(0,0,0,0.3); }
+  .fl-btn-outline:hover{ border-color:var(--ink) !important; color:var(--ink) !important; transform:translateY(-2px); }
+  .fl-btn-outline:active{ transform:translateY(0) scale(0.97); }
 `;
+
+/* ============================================================================
+   OUTLINE ICONS — thin-stroke only, used as subtle background decoration
+============================================================================ */
+function IconDumbbellOutline(props) {
+  return (
+    <svg viewBox="0 0 120 60" fill="none" {...props}>
+      <rect x="2" y="18" width="14" height="24" rx="4" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="18" y="24" width="8" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="26" y1="30" x2="94" y2="30" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="94" y="24" width="8" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="104" y="18" width="14" height="24" rx="4" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+function IconPlateOutline(props) {
+  return (
+    <svg viewBox="0 0 60 60" fill="none" {...props}>
+      <circle cx="30" cy="30" r="27" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="30" cy="30" r="10" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+function IconKettlebellOutline(props) {
+  return (
+    <svg viewBox="0 0 60 70" fill="none" {...props}>
+      <path d="M22 18a8 8 0 0 1 16 0" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="16" y="16" width="28" height="10" rx="5" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="30" cy="45" r="22" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+function IconBarbellOutline(props) {
+  return (
+    <svg viewBox="0 0 140 40" fill="none" {...props}>
+      <rect x="2" y="10" width="8" height="20" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="12" y="14" width="6" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="18" y1="20" x2="122" y2="20" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="122" y="14" width="6" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="130" y="10" width="8" height="20" rx="2" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+const DECOR_LIGHT = [
+  { Icon: IconBarbellOutline, color: "rgba(10,10,10,0.9)", opacity: 0.05, style: { position: "absolute", top: "5%", right: "-3%", width: 200, transform: "rotate(-10deg)" } },
+  { Icon: IconPlateOutline, color: "rgba(10,10,10,0.9)", opacity: 0.05, style: { position: "absolute", bottom: "8%", left: "-4%", width: 130 } },
+  { Icon: IconKettlebellOutline, color: "rgba(10,10,10,0.9)", opacity: 0.05, style: { position: "absolute", top: "45%", right: "4%", width: 90 } },
+];
+const DECOR_DARK = [
+  { Icon: IconDumbbellOutline, color: "rgba(255,255,255,0.9)", opacity: 0.1, style: { position: "absolute", top: "10%", left: "-5%", width: 170, transform: "rotate(6deg)" } },
+  { Icon: IconPlateOutline, color: "rgba(255,255,255,0.9)", opacity: 0.07, style: { position: "absolute", bottom: "-8%", right: "3%", width: 140 } },
+];
+function BackgroundDecor({ variant = "light" }) {
+  const list = variant === "dark" ? DECOR_DARK : DECOR_LIGHT;
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }} aria-hidden="true">
+      {list.map((d, i) => (
+        <div key={i} style={{ ...d.style, opacity: d.opacity, color: d.color }}>
+          <d.Icon style={{ width: "100%", height: "auto", display: "block", color: "inherit" }} />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 /* ============================================================================
    DATA MODEL
@@ -349,14 +431,15 @@ const EQUIPMENT_ICON = { Barbell: Dumbbell, Dumbbell: Dumbbell, Cable: Link2, Ma
 /* ============================================================================
    ICONOGRAPHY — original SVG marks (no photography, no third-party IP)
 ============================================================================ */
-function Logomark({ size = 28 }) {
+function Logomark({ size = 28, invert = false }) {
+  const strong = invert ? "var(--paper)" : "var(--ink)";
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
-      <rect x="1" y="14" width="6" height="4" rx="1.5" fill="var(--ink)" />
-      <rect x="25" y="14" width="6" height="4" rx="1.5" fill="var(--ink)" />
-      <rect x="6" y="10" width="3.4" height="12" rx="1.5" fill="var(--ink)" />
-      <rect x="22.6" y="10" width="3.4" height="12" rx="1.5" fill="var(--ink)" />
-      <rect x="9.4" y="14.5" width="13.2" height="3" rx="1.5" fill="var(--pine)" />
+      <rect x="1" y="14" width="6" height="4" rx="1.5" fill={strong} />
+      <rect x="25" y="14" width="6" height="4" rx="1.5" fill={strong} />
+      <rect x="6" y="10" width="3.4" height="12" rx="1.5" fill={strong} />
+      <rect x="22.6" y="10" width="3.4" height="12" rx="1.5" fill={strong} />
+      <rect x="9.4" y="14.5" width="13.2" height="3" rx="1.5" fill="var(--slate)" />
     </svg>
   );
 }
@@ -421,10 +504,10 @@ function HeroMark() {
       <rect x="122" y="112" width="36" height="58" rx="16" stroke="var(--ink)" strokeWidth="3" />
       <path d="M122 122 L70 76" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" />
       <path d="M158 122 L210 76" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" />
-      <rect x="48" y="62" width="44" height="10" rx="5" fill="var(--pine)" />
-      <rect x="188" y="62" width="44" height="10" rx="5" fill="var(--pine)" />
-      <circle cx="52" cy="67" r="15" fill="none" stroke="var(--pine)" strokeWidth="3" />
-      <circle cx="228" cy="67" r="15" fill="none" stroke="var(--pine)" strokeWidth="3" />
+      <rect x="48" y="62" width="44" height="10" rx="5" fill="var(--ink)" />
+      <rect x="188" y="62" width="44" height="10" rx="5" fill="var(--ink)" />
+      <circle cx="52" cy="67" r="15" fill="none" stroke="var(--ink)" strokeWidth="3" />
+      <circle cx="228" cy="67" r="15" fill="none" stroke="var(--ink)" strokeWidth="3" />
       <path d="M128 168 L100 250" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" />
       <path d="M152 168 L172 250" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" />
       <path d="M96 256 L70 262" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" />
@@ -447,15 +530,17 @@ function Card({ children, className = "", style = {}, ...props }) {
     </div>
   );
 }
-function Button({ children, variant = "primary", className = "", ...props }) {
-  const base = "inline-flex items-center justify-center text-center gap-2 rounded-lg px-3 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm font-medium transition-colors duration-150";
+function Button({ children, variant = "primary", dark = false, className = "", ...props }) {
+  const base = "inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold cursor-pointer transition-all duration-200";
   if (variant === "primary") {
-    return <button className={base + " text-white " + className} style={{ backgroundColor: "var(--pine)" }} {...props}>{children}</button>;
+    return <button className={base + " fl-btn-primary " + className} style={{ backgroundColor: "var(--pine)", color: "var(--paper)" }} {...props}>{children}</button>;
   }
   if (variant === "outline") {
-    return <button className={base + " border " + className} style={{ borderColor: "var(--line)", color: "var(--ink)" }} {...props}>{children}</button>;
+    const borderColor = dark ? "rgba(255,255,255,0.35)" : "var(--line)";
+    const textColor = dark ? "var(--paper)" : "var(--ink)";
+    return <button className={base + " fl-btn-outline border " + className} style={{ borderColor, color: textColor }} {...props}>{children}</button>;
   }
-  return <button className={base + " " + className} style={{ color: "var(--pine)" }} {...props}>{children}</button>;
+  return <button className={base + " fl-link " + className} style={{ color: "var(--pine)" }} {...props}>{children}</button>;
 }
 function Tag({ children, tone = "neutral" }) {
   const style = tone === "accent"
@@ -468,7 +553,7 @@ function SectionHeader({ title, onViewAll }) {
     <div className="flex items-end justify-between mb-6">
       <h2 className="fl-display text-2xl sm:text-3xl font-bold tracking-tight">{title}</h2>
       {onViewAll && (
-        <button onClick={onViewAll} className="hidden sm:flex items-center gap-1 text-sm font-medium" style={{ color: "var(--pine)" }}>
+        <button onClick={onViewAll} className="fl-link hidden sm:flex items-center gap-1 text-sm font-medium" style={{ color: "var(--slate)" }}>
           View all <ChevronRight size={15} />
         </button>
       )}
@@ -478,8 +563,8 @@ function SectionHeader({ title, onViewAll }) {
 function Chip({ active, onClick, children }) {
   return (
     <button onClick={onClick}
-      className={"px-3 py-1.5 rounded-full text-xs font-medium border transition-colors duration-150 whitespace-nowrap"}
-      style={active ? { backgroundColor: "var(--pine)", color: "#fff", borderColor: "var(--pine)" } : { backgroundColor: "#fff", color: "var(--slate)", borderColor: "var(--line)" }}>
+      className={"px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-150 whitespace-nowrap cursor-pointer" + (active ? "" : " fl-btn-outline")}
+      style={active ? { backgroundColor: "var(--pine)", color: "var(--paper)", borderColor: "var(--pine)" } : { backgroundColor: "#fff", color: "var(--slate)", borderColor: "var(--line)" }}>
       {children}
     </button>
   );
@@ -655,53 +740,55 @@ function Header({ route, go, openSearch }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 bg-white border-b" style={{ borderColor: "var(--line)" }}>
-      <Container className="flex items-center justify-between h-16">
-        <button onClick={() => go("home")} className="flex items-center gap-2">
-          <Logomark />
-          <span className="fl-display font-bold text-lg tracking-tight">FormLab</span>
-        </button>
-        <nav className="hidden md:flex items-center gap-7">
-          {NAV_ITEMS.slice(1).map(item => (
-            <button key={item.key} onClick={() => go(item.key)}
-              className="text-sm font-medium transition-colors duration-150"
-              style={{ color: route.page === item.key ? "var(--pine)" : "var(--ink)" }}>
-              {item.label}
-            </button>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <button onClick={openSearch} className="p-2 rounded-lg hover:bg-gray-50" aria-label="Search">
-            <Search size={18} />
+    <header className="sticky top-3 sm:top-4 z-40 px-3 sm:px-6 pt-3 sm:pt-4">
+      <div className="max-w-6xl mx-auto rounded-2xl border shadow-sm" style={{ backgroundColor: "var(--paper)", borderColor: "var(--line)" }}>
+        <div className="flex items-center justify-between h-14 sm:h-16 px-4 sm:px-6">
+          <button onClick={() => go("home")} className="flex items-center gap-2 cursor-pointer">
+            <Logomark />
+            <span className="fl-display font-bold text-lg tracking-tight">Dishant Fitness</span>
           </button>
-          <div className="relative hidden sm:block">
-            <button onClick={() => setProfileOpen(p => !p)} className="p-2 rounded-lg hover:bg-gray-50" aria-label="Account">
-              <User size={18} />
-            </button>
-            {profileOpen && (
-              <div className="fl-fade absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg py-1" style={{ borderColor: "var(--line)" }}>
-                <button onClick={() => { go("studio"); setProfileOpen(false); }} className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50">Trainer Studio</button>
-                <div className="px-3 py-2 text-sm" style={{ color: "var(--slate)" }}>Client sign-in</div>
-              </div>
-            )}
-          </div>
-          <button onClick={() => setMobileOpen(o => !o)} className="p-2 rounded-lg hover:bg-gray-50 md:hidden" aria-label="Menu">
-            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
-        </div>
-      </Container>
-      {mobileOpen && (
-        <div className="md:hidden border-t fl-fade" style={{ borderColor: "var(--line)" }}>
-          <Container className="py-3 flex flex-col gap-1">
-            {NAV_ITEMS.map(item => (
-              <button key={item.key} onClick={() => { go(item.key); setMobileOpen(false); }}
-                className="text-left px-2 py-2.5 text-sm font-medium rounded-lg hover:bg-gray-50"
-                style={{ color: route.page === item.key ? "var(--pine)" : "var(--ink)" }}>
+          <nav className="hidden md:flex items-center gap-7">
+            {NAV_ITEMS.slice(1).map(item => (
+              <button key={item.key} onClick={() => go(item.key)}
+                className="fl-navlink text-sm font-medium"
+                style={{ color: route.page === item.key ? "var(--ink)" : "var(--slate)" }}>
                 {item.label}
               </button>
             ))}
-            <button onClick={() => { go("studio"); setMobileOpen(false); }} className="text-left px-2 py-2.5 text-sm font-medium rounded-lg hover:bg-gray-50">Trainer Studio</button>
-          </Container>
+          </nav>
+          <div className="flex items-center gap-1">
+            <button onClick={openSearch} className="fl-icon-btn-light p-2 rounded-lg" aria-label="Search">
+              <Search size={18} />
+            </button>
+            <div className="relative hidden sm:block">
+              <button onClick={() => setProfileOpen(p => !p)} className="fl-icon-btn-light p-2 rounded-lg" aria-label="Account">
+                <User size={18} />
+              </button>
+              {profileOpen && (
+                <div className="fl-fade absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg py-1" style={{ borderColor: "var(--line)", color: "var(--ink)" }}>
+                  <button onClick={() => { go("studio"); setProfileOpen(false); }} className="fl-link w-full text-left px-3 py-2 text-sm hover:bg-gray-50" style={{ color: "var(--ink)" }}>Trainer Studio</button>
+                  <div className="px-3 py-2 text-sm" style={{ color: "var(--slate)" }}>Client sign-in</div>
+                </div>
+              )}
+            </div>
+            <button onClick={() => setMobileOpen(o => !o)} className="fl-icon-btn-light p-2 rounded-lg md:hidden" aria-label="Menu">
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
+          </div>
+        </div>
+      </div>
+      {mobileOpen && (
+        <div className="md:hidden mt-2 max-w-6xl mx-auto rounded-2xl border shadow-sm fl-fade" style={{ backgroundColor: "var(--paper)", borderColor: "var(--line)" }}>
+          <div className="py-3 px-4 flex flex-col gap-1">
+            {NAV_ITEMS.map(item => (
+              <button key={item.key} onClick={() => { go(item.key); setMobileOpen(false); }}
+                className="fl-navlink text-left px-2 py-2.5 text-sm font-medium rounded-lg"
+                style={{ color: route.page === item.key ? "var(--ink)" : "var(--slate)" }}>
+                {item.label}
+              </button>
+            ))}
+            <button onClick={() => { go("studio"); setMobileOpen(false); }} className="fl-navlink text-left px-2 py-2.5 text-sm font-medium rounded-lg" style={{ color: "var(--slate)" }}>Trainer Studio</button>
+          </div>
         </div>
       )}
     </header>
@@ -710,27 +797,28 @@ function Header({ route, go, openSearch }) {
 
 function Footer({ go }) {
   return (
-    <footer className="border-t mt-24" style={{ borderColor: "var(--line)" }}>
-      <Container className="py-12 flex flex-col md:flex-row md:justify-between gap-8">
+    <footer className="relative overflow-hidden mt-24" style={{ backgroundColor: "var(--ink)", color: "var(--paper)" }}>
+      <BackgroundDecor variant="dark" />
+      <Container className="relative py-12 flex flex-col md:flex-row md:justify-between gap-8" style={{ zIndex: 1 }}>
         <div className="max-w-xs">
-          <button onClick={() => go("home")} className="flex items-center gap-2 mb-3">
-            <Logomark size={24} />
-            <span className="fl-display font-bold">FormLab</span>
+          <button onClick={() => go("home")} className="flex items-center gap-2 mb-3 cursor-pointer">
+            <Logomark size={24} invert />
+            <span className="fl-display font-bold">Dishant Fitness</span>
           </button>
-          <p className="text-sm" style={{ color: "var(--slate)" }}>Learn exercises. Understand your muscles. Train better.</p>
+          <p className="text-sm" style={{ color: "var(--on-dark)" }}>Learn exercises. Understand your muscles. Train better.</p>
         </div>
         <div className="flex gap-12">
           <div className="flex flex-col gap-2">
-            <span className="text-xs font-semibold mb-1" style={{ color: "var(--slate)" }}>Library</span>
+            <span className="text-xs font-semibold mb-1" style={{ color: "var(--on-dark)" }}>Library</span>
             {["exercises", "muscles", "workouts", "videos", "articles"].map(k => (
-              <button key={k} onClick={() => go(k)} className="text-sm text-left capitalize hover:underline">{k}</button>
+              <button key={k} onClick={() => go(k)} className="fl-link-invert text-sm text-left capitalize">{k}</button>
             ))}
           </div>
           <div className="flex flex-col gap-2">
-            <span className="text-xs font-semibold mb-1" style={{ color: "var(--slate)" }}>More</span>
-            <span className="text-sm" style={{ color: "var(--slate)" }}>Instagram</span>
-            <span className="text-sm" style={{ color: "var(--slate)" }}>YouTube</span>
-            <span className="text-sm" style={{ color: "var(--slate)" }}>Contact trainer</span>
+            <span className="text-xs font-semibold mb-1" style={{ color: "var(--on-dark)" }}>More</span>
+            <span className="text-sm" style={{ color: "var(--on-dark)" }}>Instagram</span>
+            <span className="text-sm" style={{ color: "var(--on-dark)" }}>YouTube</span>
+            <span className="text-sm" style={{ color: "var(--on-dark)" }}>Contact trainer</span>
           </div>
         </div>
       </Container>
@@ -797,28 +885,31 @@ function SearchOverlay({ query, setQuery, onClose, go, exercises }) {
 function Home({ go, exercises, onPlay }) {
   return (
     <>
-      <Container className="pt-8 sm:pt-12 pb-16 sm:pb-24">
-        <div className="relative rounded-2xl overflow-hidden grid grid-cols-2" style={{ backgroundColor: "var(--mist)" }}>
-          <div className="p-4 sm:p-10 lg:p-14 flex flex-col justify-center min-w-0">
-            <div className="inline-flex items-center gap-2 mb-3 sm:mb-5">
-              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "var(--pine)" }} />
-              <span className="text-xs font-semibold tracking-wide" style={{ color: "var(--pine)" }}>Learn. Train. Improve.</span>
-            </div>
-            <h1 className="fl-display text-lg sm:text-3xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-2 sm:mb-5">
-              Learn every exercise.<br />Understand every muscle.
-            </h1>
-            <p className="hidden sm:block text-base sm:text-lg mb-8 max-w-md" style={{ color: "var(--slate)" }}>
-              Learn proper form, understand the muscles you train, and build better workouts with guidance from your trainer.
-            </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
-              <Button onClick={() => go("exercises")}>Browse Exercises</Button>
-              <Button variant="outline" onClick={() => go("muscles")}>Explore Muscles</Button>
+      <Container className="pt-6 sm:pt-12 pb-16 sm:pb-24">
+        <div className="relative rounded-2xl overflow-hidden" style={{ backgroundColor: "var(--mist)" }}>
+          <BackgroundDecor variant="light" />
+          <div className="relative px-4 sm:px-10 lg:px-14 pt-6 sm:pt-10" style={{ zIndex: 1 }}>
+            <div className="inline-flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "var(--ink)" }} />
+              <span className="text-xs font-semibold whitespace-nowrap" style={{ color: "var(--slate)" }}>LEARN. TRAIN. IMPROVE.</span>
             </div>
           </div>
-          <div className="relative flex items-center justify-center" style={{ minHeight: 200 }}>
-            <div style={{ width: "62%", maxWidth: 280 }}><HeroMark /></div>
-            <div className="absolute inset-y-0 left-0 w-10 sm:w-16 pointer-events-none"
-              style={{ background: "linear-gradient(to right, var(--mist), rgba(247,247,245,0))" }} />
+          <div className="relative grid grid-cols-2" style={{ zIndex: 1 }}>
+            <div className="px-4 pt-3 pb-8 sm:px-10 sm:pt-4 sm:pb-10 lg:px-14 lg:pb-14 flex flex-col justify-center min-w-0">
+              <h1 className="fl-display text-xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-2 sm:mb-5">
+                Learn every exercise.<br />Understand every muscle.
+              </h1>
+              <p className="hidden sm:block text-base sm:text-lg mb-8 max-w-md" style={{ color: "var(--slate)" }}>
+                Learn proper form, understand the muscles you train, and build better workouts with guidance from your trainer.
+              </p>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
+                <Button onClick={() => go("exercises")}>Browse Exercises</Button>
+                <Button variant="outline" onClick={() => go("muscles")}>Explore Muscles</Button>
+              </div>
+            </div>
+            <div className="relative flex items-center justify-center px-4 pb-8 sm:p-8" style={{ minHeight: 200 }}>
+              <div style={{ width: "60%", maxWidth: 260 }}><HeroMark /></div>
+            </div>
           </div>
         </div>
       </Container>
@@ -935,7 +1026,7 @@ function ExercisesPage({ go, exercises }) {
           <Card className="p-5 lg:sticky lg:top-20">
             <div className="flex items-center justify-between mb-1">
               <span className="font-semibold text-sm fl-display">Filters</span>
-              {activeCount > 0 && <button onClick={clearAll} className="text-xs font-medium" style={{ color: "var(--pine)" }}>Clear all</button>}
+              {activeCount > 0 && <button onClick={clearAll} className="fl-link text-xs font-medium" style={{ color: "var(--slate)" }}>Clear all</button>}
             </div>
             <div className="mt-4">
               <FilterGroup title="Muscle" options={MUSCLES.map(m => m.name)} selected={filters.muscle.map(s => MUSCLES.find(m => m.slug === s)?.name)}
@@ -1364,6 +1455,47 @@ function TrainerStudio({ exercises, setExercises }) {
 }
 
 /* ============================================================================
+   LOADING SCREEN — full black screen, dumbbell fills grey → white, fades out
+============================================================================ */
+const DUMBBELL_RECTS = [
+  { x: 2, y: 34, width: 16, height: 32, rx: 4 },
+  { x: 22, y: 24, width: 10, height: 52, rx: 3 },
+  { x: 36, y: 44, width: 48, height: 12, rx: 6 },
+  { x: 88, y: 24, width: 10, height: 52, rx: 3 },
+  { x: 104, y: 34, width: 16, height: 32, rx: 4 },
+];
+function DumbbellShape({ color }) {
+  return <g fill={color}>{DUMBBELL_RECTS.map((r, i) => <rect key={i} {...r} />)}</g>;
+}
+function LoadingScreen({ onDone }) {
+  const [filled, setFilled] = useState(false);
+  const [fading, setFading] = useState(false);
+  useEffect(() => {
+    const t1 = setTimeout(() => setFilled(true), 120);
+    const t2 = setTimeout(() => setFading(true), 1500);
+    const t3 = setTimeout(() => onDone(), 2000);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, [onDone]);
+  const w = 140, h = 116;
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black"
+      style={{ transition: "opacity .5s ease", opacity: fading ? 0 : 1, pointerEvents: fading ? "none" : "auto" }}>
+      <div style={{ position: "relative", width: w, height: h }}>
+        <svg viewBox="0 0 120 100" width={w} height={h} style={{ position: "absolute", top: 0, left: 0 }}>
+          <DumbbellShape color="#2E2E2E" />
+        </svg>
+        <div style={{ position: "absolute", left: 0, bottom: 0, width: w, overflow: "hidden", height: filled ? h : 0, transition: "height 1.3s cubic-bezier(.65,0,.35,1)" }}>
+          <svg viewBox="0 0 120 100" width={w} height={h} style={{ position: "absolute", left: 0, bottom: 0 }}>
+            <DumbbellShape color="#FFFFFF" />
+          </svg>
+        </div>
+      </div>
+      <div className="mt-6 text-xs font-medium" style={{ color: "#6B6F73", letterSpacing: "0.25em" }}>DISHANT FITNESS</div>
+    </div>
+  );
+}
+
+/* ============================================================================
    APP ROOT
 ============================================================================ */
 export default function App() {
@@ -1372,6 +1504,11 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [player, setPlayer] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (typeof document !== "undefined") document.title = "Dishant Fitness";
+  }, []);
 
   function go(page, slug = null) {
     setRoute({ page, slug });
@@ -1397,8 +1534,12 @@ export default function App() {
   return (
     <div className="fl-root min-h-screen">
       <style>{THEME_CSS}</style>
+      {loading && <LoadingScreen onDone={() => setLoading(false)} />}
       <Header route={route} go={go} openSearch={openSearch} />
-      {page}
+      <div className="relative">
+        <BackgroundDecor variant="light" />
+        <div className="relative" style={{ zIndex: 1 }}>{page}</div>
+      </div>
       <Footer go={go} />
       {searchOpen && <SearchOverlay query={query} setQuery={setQuery} onClose={closeSearch} go={go} exercises={exercises} />}
       {player && <PlayerModal item={player} onClose={() => setPlayer(null)} />}
