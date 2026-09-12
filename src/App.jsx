@@ -896,7 +896,7 @@ function Home({ go, exercises, onPlay }) {
           </div>
           <div className="relative grid grid-cols-2" style={{ zIndex: 1 }}>
             <div className="px-4 pt-3 pb-8 sm:px-10 sm:pt-4 sm:pb-10 lg:px-14 lg:pb-14 flex flex-col justify-center min-w-0">
-              <h1 className="fl-display text-xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-2 sm:mb-5">
+              <h1 className="fl-display text-xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-2 sm:mb-5">
                 Learn every exercise.<br />Understand every muscle.
               </h1>
               <p className="hidden sm:block text-base sm:text-lg mb-8 max-w-md" style={{ color: "var(--slate)" }}>
@@ -952,7 +952,7 @@ function Home({ go, exercises, onPlay }) {
             ].map((f, i) => (
               <div key={i} className="flex flex-col items-start gap-2">
                 <f.icon size={20} color="var(--pine)" />
-                <div className="font-semibold text-sm fl-display">{f.title}</div>
+                <div className="font-bold text-sm fl-display">{f.title}</div>
                 <div className="text-sm" style={{ color: "var(--slate)" }}>{f.sub}</div>
               </div>
             ))}
